@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dinamik Web Sitem</title>
+    <style>
+        /* CSS Kodları */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #3498db; /* Başlangıç arka plan rengi */
+            color: #ecf0f1; /* Başlangıç metin rengi */
+            text-align: center;
+            transition: background-color 0.8s ease-in-out, color 0.8s ease-in-out; /* Renk geçişleri */
+            padding: 20px;
+            box-sizing: border-box; /* padding'in genişliği etkilememesi için */
+        }
+        .container {
+            background-color: rgba(0, 0, 0, 0.4); /* Şeffaf koyu kutu */
+            padding: 40px 60px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            max-width: 700px;
+            width: 90%;
+            animation: fadeIn 1s ease-out; /* Sayfa yüklenince fade in efekti */
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        p {
+            font-size: 1.4em;
+            margin-bottom: 40px;
+            line-height: 1.6;
+            transition: color 0.5s ease-in-out; /* Paragraf rengi geçişi */
+        }
+        button {
+            background-color: #e74c3c; /* Kırmızı düğme */
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.3em;
+            border-radius: 50px; /* Yuvarlak düğme */
+            cursor: pointer;
+            outline: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+        button:hover {
+            background-color: #c0392b; /* Koyu kırmızı hover */
+            transform: translateY(-3px) scale(1.02); /* Hafif yukarı ve büyüme */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Başlangıç Animasyonu */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Benim Süper Dinamik Web Sayfam!</h1>
+        <p id="dinamikMetin">Bu, yapay zeka tarafından oluşturulmuş ve harika etkileşimlere sahip bir web sayfasıdır. Hadi dene!</p>
+        <button id="renkDegistiriciButon">Rengi Değiştir!</button>
+    </div>
+
+    <script>
+        // JavaScript Kodları
+        const buton = document.getElementById('renkDegistiriciButon');
+        const paragraf = document.getElementById('dinamikMetin');
+        const body = document.body;
+
+        // Rastgele HEX renk kodu üreten fonksiyon
+        function rastgeleHexRenkUret() {
+            return '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0');
+        }
+
+        // Butona tıklandığında çalışacak olay dinleyicisi
+        buton.addEventListener('click', () => {
+            const yeniRenk = rastgeleHexRenkUret();
+            const yeniArkaPlanRenk = rastgeleHexRenkUret();
+
+            paragraf.style.color = yeniRenk; // Paragrafın metin rengini değiştir
+            body.style.backgroundColor = yeniArkaPlanRenk; // Arka plan rengini değiştir
+
+            // Butonun rengini de değiştirelim, böylece her tıklamada farklı bir deneyim olsun
+            buton.style.backgroundColor = rastgeleHexRenkUret();
+
+            // Paragrafın metnini de değiştirelim ki daha dinamik hissettirsin
+            const metinler = [
+                "Vay canına! Yeni bir renk kombinasyonu!",
+                "Bu renk çok yakıştı!",
+                "Tıklamaya devam et, sürprizler bitmez!",
+                "Yapay zeka renkleri seviyor!",
+                "Harika bir tercih! Tekrar dene!",
+                "Süper dinamik değil miyiz?",
+                "Kodlar çalışıyor! İşte bu!",
+                "Senin için yeni bir renk paleti!"
+            ];
+            const rastgeleMetinIndex = Math.floor(Math.random() * metinler.length);
+            paragraf.textContent = metinler[rastgeleMetinIndex]; // Yeni metni ata
+        });
+
+        // Sayfa yüklendiğinde bir kez rastgele renk ata (isteğe bağlı, hoş bir başlangıç için)
+        document.addEventListener('DOMContentLoaded', () => {
+            body.style.backgroundColor = rastgeleHexRenkUret();
+            paragraf.style.color = rastgeleHexRenkUret();
+            buton.style.backgroundColor = rastgeleHexRenkUret();
+        });
+
+    </script>
+</body>
+</html>
